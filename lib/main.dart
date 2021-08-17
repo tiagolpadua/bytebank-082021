@@ -2,12 +2,76 @@ import 'package:flutter/material.dart';
 
 // CTRL+ALT+L
 // ALT+ENTER
-void main() {
-  runApp(
-    MaterialApp(
-      home: ListaTransferencias()
-    ),
-  );
+void main() => runApp(BytebankApp());
+
+class BytebankApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(home: FormularioTransferencia());
+  }
+}
+
+class FormularioTransferencia extends StatelessWidget {
+  final TextEditingController _controladorCampoNumeroConta =
+      TextEditingController();
+  final TextEditingController _controladorCampoValor = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Criando Transferência"),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextField(
+              controller: _controladorCampoNumeroConta,
+              style: TextStyle(fontSize: 24.0),
+              decoration: InputDecoration(
+                labelText: "Número da Conta",
+                hintText: "0000",
+              ),
+              keyboardType: TextInputType.number,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextField(
+              controller: _controladorCampoValor,
+              style: TextStyle(fontSize: 24.0),
+              decoration: InputDecoration(
+                icon: Icon(Icons.monetization_on),
+                labelText: "Valor",
+                hintText: "0.00",
+              ),
+              keyboardType: TextInputType.number,
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              print("Clicou no confirmar!");
+              debugPrint("Clicou no confirmar!");
+
+              final int? numeroConta =
+                  int.tryParse(_controladorCampoNumeroConta.text);
+              final double? valor =
+                  double.tryParse(_controladorCampoValor.text);
+
+              if (numeroConta != null && valor != null) {
+                final transferencia = Transferencia(valor, numeroConta);
+                debugPrint('$transferencia');
+              } else {
+                debugPrint("Valores devem ser preenchidos!");
+              }
+            },
+            child: Text("Confirmar"),
+          )
+        ],
+      ),
+    );
+  }
 }
 
 class ListaTransferencias extends StatelessWidget {
@@ -15,11 +79,11 @@ class ListaTransferencias extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Transferênciasas"),
+        title: Text("Transferências"),
       ),
       body: Column(
         children: [
-          ItemTransferencia(Transferencia(100.0, 2000)),
+          ItemTransferencia(Transferencia(500.0, 2000)),
           ItemTransferencia(Transferencia(200.0, 3000)),
           ItemTransferencia(Transferencia(300.0, 4000)),
         ],
@@ -56,6 +120,11 @@ class Transferencia {
   final int numeroConta;
 
   Transferencia(this.valor, this.numeroConta);
+
+  @override
+  String toString() {
+    return 'Transferencia{valor: $valor, numeroConta: $numeroConta}';
+  }
 }
 
 // alt + enter
