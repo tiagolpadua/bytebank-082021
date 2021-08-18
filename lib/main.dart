@@ -63,8 +63,19 @@ class FormularioTransferencia extends StatelessWidget {
                 final transferencia = Transferencia(valor, numeroConta);
                 debugPrint('$transferencia');
               } else {
-                debugPrint("Valores devem ser preenchidos!");
+
+                final snackBar = SnackBar(content: Text('Valores Inválidos!'));
+
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+                // final snackBar = SnackBar(
+                //   content: Text('Valores Inválidos!'),
+                // );
+                // Scaffold.of(context).showSnackBar(snackBar);
               }
+              // } else {
+              //   debugPrint("Valores devem ser preenchidos!");
+              // }
             },
             child: Text("Confirmar"),
           )
