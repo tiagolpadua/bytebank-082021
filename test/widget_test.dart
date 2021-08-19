@@ -39,7 +39,7 @@ void main() {
     // Confirma
     await tester.tap(find.byKey(const Key('cria_transf')));
 
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(Duration(seconds: 3));
 
     expect(find.text('123'), findsOneWidget);
   });
