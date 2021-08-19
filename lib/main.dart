@@ -5,11 +5,17 @@ import 'package:flutter/material.dart';
 // ALT+ENTER
 void main() => runApp(BytebankApp());
 
-class BytebankApp extends StatelessWidget {
+class BytebankApp extends StatefulWidget {
+  bool darkMode = false;
+
+  @override
+  _BytebankAppState createState() => _BytebankAppState();
+}
+
+class _BytebankAppState extends State<BytebankApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
+    var lightTheme = ThemeData(
         primaryColor: Colors.green[900],
         accentColor: Colors.blueAccent[700],
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -17,9 +23,18 @@ class BytebankApp extends StatelessWidget {
             primary: Colors.blueAccent[700]
           ),
         ),
-      ),
-      home: ListaTransferencias(),
+      );
+
+    return MaterialApp(
+      theme: widget.darkMode ? ThemeData.dark() : lightTheme,
+      home: ListaTransferencias(widget.darkMode, toggleDarkMode),
     );
+  }
+
+  void toggleDarkMode() {
+    setState(() {
+      widget.darkMode = !widget.darkMode;
+    });
   }
 }
 

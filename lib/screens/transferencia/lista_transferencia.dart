@@ -6,6 +6,11 @@ import 'package:flutter/material.dart';
 class ListaTransferencias extends StatefulWidget {
   final List<Transferencia> _transferencias = [];
 
+  final bool _darkMode;
+  final VoidCallback _toggleDarkMode;
+
+  ListaTransferencias(this._darkMode, this._toggleDarkMode);
+
   @override
   State<StatefulWidget> createState() {
     return ListaTransferenciasState();
@@ -19,7 +24,16 @@ class ListaTransferenciasState extends State<ListaTransferencias> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(_tituloAppBar),
+        title: Row(
+          children: [
+            Text(_tituloAppBar),
+            Spacer(),
+            IconButton(
+              onPressed: () => widget._toggleDarkMode(),
+              icon: Icon(widget._darkMode ? Icons.lightbulb_outline: Icons.lightbulb),
+            )
+          ],
+        ),
       ),
       body: ListView.builder(
         itemCount: widget._transferencias.length,
