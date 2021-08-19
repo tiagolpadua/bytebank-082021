@@ -71,19 +71,20 @@ class Editor extends StatelessWidget {
   final IconData? icone;
   final Key? key;
 
-  Editor(
-      {required this.controlador,
-      required this.rotulo,
-      required this.dica,
-      this.icone,
-      this.key});
+  Editor({
+    required this.controlador,
+    required this.rotulo,
+    required this.dica,
+    this.icone,
+    this.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: TextField(
-        key: key ?? null,
+        key: key,
         controller: controlador,
         style: TextStyle(fontSize: 24.0),
         decoration: InputDecoration(
@@ -121,21 +122,41 @@ class ListaTransferenciasState extends State<ListaTransferencias> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // print("deveria ter navegado...");
-          final Future future =
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return FormularioTransferencia();
-          }));
-          future.then((transferenciaRecebida) {
-            debugPrint('chegou no then do future');
-            debugPrint('$transferenciaRecebida');
-            if (transferenciaRecebida != null) {
-              setState(() => widget._transferencias.add(transferenciaRecebida));
-            } else {
-              print('voltou nulo');
-            }
-          });
+        onPressed: () async {
+          print("deveria ter navegado...");
+
+          debugPrint("Antes do await");
+
+          final transferenciaRecebida = await Navigator.push<Transferencia>(
+            context,
+            MaterialPageRoute(
+              builder: (context) => FormularioTransferencia(),
+            ),
+          );
+
+          debugPrint("Depois do await");
+
+          if (transferenciaRecebida != null) {
+            setState(() => widget._transferencias.add(transferenciaRecebida));
+          } else {
+            print('voltou nulo');
+          }
+
+          // debugPrint("Antes do future");
+          // final Future future =
+          //     Navigator.push(context, MaterialPageRoute(builder: (context) {
+          //   return FormularioTransferencia();
+          // }));
+          // future.then((transferenciaRecebida) {
+          //   debugPrint('chegou no then do future');
+          //   debugPrint('$transferenciaRecebida');
+          //   if (transferenciaRecebida != null) {
+          //     setState(() => widget._transferencias.add(transferenciaRecebida));
+          //   } else {
+          //     print('voltou nulo');
+          //   }
+          // });
+          // debugPrint("Depois do future");
         },
         child: Icon(Icons.add),
       ),

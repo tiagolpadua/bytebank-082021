@@ -11,7 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:bytebank/main.dart';
 
 void main() {
-  testWidgets('Inicia a aplicação Bytebank', (WidgetTester tester) async {
+  testWidgets('App Bytebank deve iniciar na tela de transferências e navegar para criando transferência', (WidgetTester tester) async {
     await tester.pumpWidget(BytebankApp());
 
     expect(find.text('Transferências'), findsOneWidget);
@@ -24,7 +24,7 @@ void main() {
     expect(find.text('Criando Transferência'), findsOneWidget);
   });
 
-  testWidgets('Deve incluir uma transferência', (WidgetTester tester) async {
+  testWidgets('Ao incluir uma transferência, deve incluí-la na lista de transferências', (WidgetTester tester) async {
     await tester.pumpWidget(BytebankApp());
 
     await tester.tap(find.byIcon(Icons.add));
