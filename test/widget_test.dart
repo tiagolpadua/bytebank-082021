@@ -11,20 +11,36 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:bytebank/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+  testWidgets('Inicia a aplicação Bytebank', (WidgetTester tester) async {
+    await tester.pumpWidget(BytebankApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.text('Transferências'), findsOneWidget);
+    expect(find.text('Criando Transferência'), findsNothing);
 
-    // Tap the '+' icon and trigger a frame.
     await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Transferências'), findsNothing);
+    expect(find.text('Criando Transferência'), findsOneWidget);
+  });
+
+  testWidgets('Deve incluir uma transferência', (WidgetTester tester) async {
+    await tester.pumpWidget(BytebankApp());
+
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pumpAndSettle();
+
+    // Digita o nr da conta
+    await tester.enterText(find.byKey(Key('nr_conta')), '123');
+
+    // Digita o valor
+    await tester.enterText(find.byKey(Key('valor')), '456');
+
+    // Confirma
+    await tester.tap(find.byKey(const Key('cria_transf')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('123'), findsOneWidget);
   });
 }
