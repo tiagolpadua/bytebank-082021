@@ -1,3 +1,5 @@
+import 'package:bytebank/screens/contacts/contacts_lista.dart';
+import 'package:bytebank/screens/dashboard/dashboard.dart';
 import 'package:bytebank/screens/transferencia/lista_transferencia.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +29,8 @@ class _BytebankAppState extends State<BytebankApp> {
 
     return MaterialApp(
       theme: widget.darkMode ? ThemeData.dark() : lightTheme,
-      home: ListaTransferencias(widget.darkMode, toggleDarkMode),
+      // home: ListaTransferencias(widget.darkMode, toggleDarkMode),
+      home: Dashboard(),
     );
   }
 
