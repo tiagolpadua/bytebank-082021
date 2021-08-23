@@ -1,11 +1,18 @@
-import 'package:bytebank/screens/contacts/contacts_lista.dart';
+import 'package:bytebank/database/app_database.dart';
+import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/screens/dashboard/dashboard.dart';
-import 'package:bytebank/screens/transferencia/lista_transferencia.dart';
 import 'package:flutter/material.dart';
 
-// CTRL+ALT+L
-// ALT+ENTER
-void main() => runApp(BytebankApp());
+void main() async {
+  runApp(BytebankApp());
+
+  // save(Contact(2, 'alex1', 1000)).then((id) {
+  //   print('Contato salvo com o id: $id');
+  //   findAll().then((contacts) => debugPrint(contacts.toString()));
+  // });
+
+  findAll().then((contacts) => debugPrint(contacts.toString()));
+}
 
 class BytebankApp extends StatefulWidget {
   bool darkMode = false;
@@ -18,14 +25,12 @@ class _BytebankAppState extends State<BytebankApp> {
   @override
   Widget build(BuildContext context) {
     var lightTheme = ThemeData(
-        primaryColor: Colors.green[900],
-        accentColor: Colors.blueAccent[700],
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            primary: Colors.blueAccent[700]
-          ),
-        ),
-      );
+      primaryColor: Colors.green[900],
+      accentColor: Colors.blueAccent[700],
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(primary: Colors.blueAccent[700]),
+      ),
+    );
 
     return MaterialApp(
       theme: widget.darkMode ? ThemeData.dark() : lightTheme,
@@ -40,5 +45,3 @@ class _BytebankAppState extends State<BytebankApp> {
     });
   }
 }
-
-
