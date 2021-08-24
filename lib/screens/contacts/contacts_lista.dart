@@ -4,7 +4,12 @@ import 'package:bytebank/screens/contacts/contact_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ContactsList extends StatelessWidget {
+class ContactsList extends StatefulWidget {
+  @override
+  _ContactsListState createState() => _ContactsListState();
+}
+
+class _ContactsListState extends State<ContactsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,29 +17,44 @@ class ContactsList extends StatelessWidget {
         title: Text('Contacts'),
       ),
       body: FutureBuilder<List<Contact>>(
+        initialData: [],
+        // future: Future.delayed(Duration(seconds: 1), () => findAll()),
         future: findAll(),
         builder: (context, snapshot) {
-          final contacts = snapshot.data;
-          if (contacts != null) {
-            return ListView.builder(
-              itemCount: contacts.length,
-              itemBuilder: (context, index) {
-                final contact = contacts[index];
-                return _ContactItem(contact);
-              },
-            );
-          } else {
-            return CircularProgressIndicator();
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [CircularProgressIndicator(), Text('Loading')],
+                ),
+              );
+            case ConnectionState.none:
+            case ConnectionState.active:
+            case ConnectionState.done:
+              final List<Contact> contacts = snapshot.data!;
+              return ListView.builder(
+                itemCount: contacts.length,
+                itemBuilder: (context, index) {
+                  final contact = contacts[index];
+                  return _ContactItem(contact);
+                },
+              );
           }
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)
-              .push((MaterialPageRoute(
-                builder: (context) => ContactForm(),
-              )))
-              .then((newContact) => debugPrint(newContact.toString()));
+              .push(
+                (MaterialPageRoute(
+                  builder: (context) => ContactForm(),
+                )),
+              )
+              .then(
+                (id) => setState(() {}),
+              );
         },
         child: Icon(Icons.add),
       ),
