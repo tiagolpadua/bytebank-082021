@@ -26,7 +26,7 @@ class _BytebankAppState extends State<BytebankApp> {
     return MaterialApp(
       theme: widget._darkMode ? ThemeData.dark() : lightTheme,
       // home: ListaTransferencias(widget.darkMode, toggleDarkMode),
-      home: Dashboard(),
+      home: Dashboard(widget._darkMode, toggleDarkMode),
     );
   }
 

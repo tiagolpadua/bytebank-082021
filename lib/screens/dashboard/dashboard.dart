@@ -1,8 +1,15 @@
 import 'package:bytebank/screens/contacts/contacts_lista.dart';
+import 'package:bytebank/screens/transferencia/lista_transferencia.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
+
+  final bool _darkMode;
+  final VoidCallback _toggleDarkmode;
+
+  Dashboard(this._darkMode, this._toggleDarkmode);
+
   @override
   _DashboardState createState() => _DashboardState();
 }
@@ -22,7 +29,17 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dashboard'),
+        title: Row(
+          children: [
+            Text('Dashboard'),
+            Spacer(),
+            IconButton(
+              onPressed: () => widget._toggleDarkmode(),
+              icon: Icon(
+                  widget._darkMode ? Icons.lightbulb_outline : Icons.lightbulb),
+            )
+          ],
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,7 +69,7 @@ class _DashboardState extends State<Dashboard> {
                   'Transaction Feed',
                   Icons.description,
                   onClick: () {
-                    print("Clicou em Transaction Feed");
+                    _showTransactionFeed(context);
                   },
                 ),
               ],
@@ -67,6 +84,14 @@ class _DashboardState extends State<Dashboard> {
     Navigator.of(context).push(
       (MaterialPageRoute(
         builder: (context) => ContactsList(),
+      )),
+    );
+  }
+
+  void _showTransactionFeed(BuildContext context) {
+    Navigator.of(context).push(
+      (MaterialPageRoute(
+        builder: (context) => ListaTransferencias(),
       )),
     );
   }
