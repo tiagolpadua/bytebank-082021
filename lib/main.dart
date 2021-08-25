@@ -1,21 +1,12 @@
-import 'package:bytebank/database/app_database.dart';
-import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/screens/dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
   runApp(BytebankApp());
-
-  // save(Contact(2, 'alex1', 1000)).then((id) {
-  //   print('Contato salvo com o id: $id');
-  //   findAll().then((contacts) => debugPrint(contacts.toString()));
-  // });
-
-  findAll().then((contacts) => debugPrint(contacts.toString()));
 }
 
 class BytebankApp extends StatefulWidget {
-  bool darkMode = false;
+  bool _darkMode = false;
 
   @override
   _BytebankAppState createState() => _BytebankAppState();
@@ -33,7 +24,7 @@ class _BytebankAppState extends State<BytebankApp> {
     );
 
     return MaterialApp(
-      theme: widget.darkMode ? ThemeData.dark() : lightTheme,
+      theme: widget._darkMode ? ThemeData.dark() : lightTheme,
       // home: ListaTransferencias(widget.darkMode, toggleDarkMode),
       home: Dashboard(),
     );
@@ -41,7 +32,7 @@ class _BytebankAppState extends State<BytebankApp> {
 
   void toggleDarkMode() {
     setState(() {
-      widget.darkMode = !widget.darkMode;
+      widget._darkMode = !widget._darkMode;
     });
   }
 }

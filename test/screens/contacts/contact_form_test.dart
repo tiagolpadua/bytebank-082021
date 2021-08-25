@@ -10,6 +10,8 @@ void main() {
       ),
     );
 
+    await tester.pumpAndSettle();
+
     expect(find.text('New contact'), findsOneWidget);
   });
 }

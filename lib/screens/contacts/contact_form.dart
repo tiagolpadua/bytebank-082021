@@ -13,6 +13,8 @@ class _ContactFormState extends State<ContactForm> {
   final TextEditingController _accountNumberController =
       TextEditingController();
 
+  final ContactDao _dao = ContactDao();
+
   @override
   void dispose() {
     super.dispose();
@@ -61,7 +63,7 @@ class _ContactFormState extends State<ContactForm> {
                     if (accountNumber != null) {
                       final Contact newContact = Contact(0, name, accountNumber);
 
-                      save(newContact).then((id) => Navigator.pop(context));
+                      _dao.save(newContact).then((id) => Navigator.pop(context));
                     } else {
                       print("dados com erro...");
                     }

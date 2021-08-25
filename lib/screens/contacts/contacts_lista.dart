@@ -10,6 +10,8 @@ class ContactsList extends StatefulWidget {
 }
 
 class _ContactsListState extends State<ContactsList> {
+  final ContactDao _dao = ContactDao();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +21,7 @@ class _ContactsListState extends State<ContactsList> {
       body: FutureBuilder<List<Contact>>(
         initialData: [],
         // future: Future.delayed(Duration(seconds: 1), () => findAll()),
-        future: findAll(),
+        future: _dao.findAll(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
