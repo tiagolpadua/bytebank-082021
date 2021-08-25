@@ -65,15 +65,15 @@ class _FormularioTransferenciaState extends State<FormularioTransferencia> {
   }
 
   _criaTransferencia(BuildContext context) {
-    final int? numeroConta = int.tryParse(_controladorCampoNumeroConta.text);
-    final double? valor = double.tryParse(_controladorCampoValor.text);
-
-    if (numeroConta != null && valor != null) {
-      final transferenciaCriada = Transferencia(valor, numeroConta);
-      Navigator.pop(context, transferenciaCriada);
-    } else {
-      final snackBar = SnackBar(content: Text('Valores Inválidos!'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
+    // final int? numeroConta = int.tryParse(_controladorCampoNumeroConta.text);
+    // final double? valor = double.tryParse(_controladorCampoValor.text);
+    //
+    // if (numeroConta != null && valor != null) {
+    //   final transferenciaCriada = Transferencia(valor, numeroConta);
+    //   Navigator.pop(context, transferenciaCriada);
+    // } else {
+    //   final snackBar = SnackBar(content: Text('Valores Inválidos!'));
+    //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    // }
   }
 }

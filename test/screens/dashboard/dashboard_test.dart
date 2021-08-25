@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('Dashboard deve ser renderizado', (WidgetTester tester) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Dashboard(),
-      ),
-    );
-
-    await tester.pumpAndSettle();
-
-    expect(find.text('Dashboard'), findsOneWidget);
-  });
+  // testWidgets('Dashboard deve ser renderizado', (WidgetTester tester) async {
+  //   await tester.pumpWidget(
+  //     MaterialApp(
+  //       home: Dashboard(),
+  //     ),
+  //   );
+  //
+  //   await tester.pumpAndSettle();
+  //
+  //   expect(find.text('Dashboard'), findsOneWidget);
+  // });
 }

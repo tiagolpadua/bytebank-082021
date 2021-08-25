@@ -1,4 +1,5 @@
 import 'package:bytebank/screens/contacts/contacts_lista.dart';
+import 'package:bytebank/screens/transactions/transactions_list.dart';
 import 'package:bytebank/screens/transferencia/lista_transferencia.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +92,7 @@ class _DashboardState extends State<Dashboard> {
   void _showTransactionFeed(BuildContext context) {
     Navigator.of(context).push(
       (MaterialPageRoute(
-        builder: (context) => ListaTransferencias(),
+        builder: (context) => TransactionsList(),
       )),
     );
   }
