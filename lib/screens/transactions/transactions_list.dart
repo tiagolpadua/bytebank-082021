@@ -1,6 +1,7 @@
-import 'package:bytebank/http/webclient.dart';
+import 'package:bytebank/components/centered_message.dart';
+import 'package:bytebank/components/progress.dart';
+import 'package:bytebank/http/transaction_webclient.dart';
 import 'package:bytebank/models/transaction.dart';
-import 'package:bytebank/screens/transferencia/formulario_transferencia.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,8 @@ class TransactionsList extends StatefulWidget {
 }
 
 class TransactionsListState extends State<TransactionsList> {
+  final TransactionWebClient _webClient = TransactionWebClient();
+
   @override
   Widget build(BuildContext context) {
     const _tituloAppBar = "Transactions";
@@ -21,49 +24,41 @@ class TransactionsListState extends State<TransactionsList> {
         title: Text(_tituloAppBar),
       ),
       body: FutureBuilder<List<Transaction>>(
-          future: Future.delayed(Duration(seconds: 2)).then((value) => findAll()),
+          // future:
+          //     Future.delayed(Duration(seconds: 2)).then((value) => findAll()),
+          future: _webClient.findAll(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
               case ConnectionState.waiting:
               case ConnectionState.active:
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      CircularProgressIndicator(),
-                      Text('Loading'),
-                    ],
-                  ),
-                );
+                return Progress();
               case ConnectionState.done:
                 final List<Transaction>? transactions = snapshot.data;
-                if (transactions != null) {
-                  return ListView.builder(
-                    itemCount: transactions.length,
-                    itemBuilder: (context, indice) {
-                      final transaction = transactions[indice];
-                      return TransactionItem(transaction);
-                    },
+
+                if (transactions == null) {
+                  return CenteredMessage(
+                    'Unkown Error',
+                    icon: Icons.error,
                   );
-                } else {
-                  return Text("Erro ao carregar transactions...");
                 }
-                break;
+
+                if (transactions.isEmpty) {
+                  return CenteredMessage(
+                    'No transactions found',
+                    icon: Icons.warning,
+                  );
+                }
+
+                return ListView.builder(
+                  itemCount: transactions.length,
+                  itemBuilder: (context, indice) {
+                    final transaction = transactions[indice];
+                    return TransactionItem(transaction);
+                  },
+                );
             }
           }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final receivedTransaction = await Navigator.push<Transaction>(
-            context,
-            MaterialPageRoute(
-              builder: (context) => FormularioTransferencia(),
-            ),
-          );
-        },
-        child: Icon(Icons.add),
-      ),
     );
   }
 }
