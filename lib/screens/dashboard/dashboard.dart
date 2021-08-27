@@ -5,11 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
-  final bool _darkMode;
-  final VoidCallback _toggleDarkmode;
-
-  Dashboard(this._darkMode, this._toggleDarkmode);
-
   @override
   _DashboardState createState() => _DashboardState();
 }
@@ -29,7 +24,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Cabecalho("Dashboard", widget._darkMode, widget._toggleDarkmode),
+        title: Cabecalho("Dashboard"),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,7 +76,7 @@ class _DashboardState extends State<Dashboard> {
   void _showTransactionFeed(BuildContext context) {
     Navigator.of(context).push(
       (MaterialPageRoute(
-        builder: (context) => TransactionsList(widget._darkMode, widget._toggleDarkmode),
+        builder: (context) => TransactionsList(),
       )),
     );
   }

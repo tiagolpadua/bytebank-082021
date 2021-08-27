@@ -7,11 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TransactionsList extends StatefulWidget {
-  final bool _darkMode;
-  final VoidCallback _toggleDarkmode;
-
-  TransactionsList(this._darkMode, this._toggleDarkmode);
-
   @override
   State<StatefulWidget> createState() {
     return TransactionsListState();
@@ -27,7 +22,7 @@ class TransactionsListState extends State<TransactionsList> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Cabecalho(_tituloAppBar, widget._darkMode, widget._toggleDarkmode),
+        title: Cabecalho(_tituloAppBar),
       ),
       body: FutureBuilder<List<Transaction>>(
           // future:
