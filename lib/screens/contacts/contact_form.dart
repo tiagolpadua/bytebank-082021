@@ -1,3 +1,4 @@
+import 'package:bytebank/components/cabecalho.dart';
 import 'package:bytebank/database/app_database.dart';
 import 'package:bytebank/models/contact.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,7 +27,7 @@ class _ContactFormState extends State<ContactForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New contact'),
+        title: Cabecalho("New Contact"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -61,9 +62,12 @@ class _ContactFormState extends State<ContactForm> {
                     final int? accountNumber =
                         int.tryParse(_accountNumberController.text);
                     if (accountNumber != null) {
-                      final Contact newContact = Contact(0, name, accountNumber);
+                      final Contact newContact =
+                          Contact(0, name, accountNumber);
 
-                      _dao.save(newContact).then((id) => Navigator.pop(context));
+                      _dao
+                          .save(newContact)
+                          .then((id) => Navigator.pop(context));
                     } else {
                       print("dados com erro...");
                     }

@@ -1,3 +1,4 @@
+import 'package:bytebank/components/cabecalho.dart';
 import 'package:bytebank/components/progress.dart';
 import 'package:bytebank/database/app_database.dart';
 import 'package:bytebank/models/contact.dart';
@@ -18,7 +19,7 @@ class _ContactsListState extends State<ContactsList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contacts'),
+        title: Cabecalho("Contacts"),
       ),
       body: FutureBuilder<List<Contact>>(
         initialData: [],

@@ -1,3 +1,4 @@
+import 'package:bytebank/components/cabecalho.dart';
 import 'package:bytebank/http/transaction_webclient.dart';
 import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/models/transaction.dart';
@@ -20,7 +21,7 @@ class _TransactionFormState extends State<TransactionForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New transaction'),
+        title: Cabecalho("New transaction"),
       ),
       body: SingleChildScrollView(
         child: Padding(

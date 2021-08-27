@@ -1,3 +1,4 @@
+import 'package:bytebank/components/cabecalho.dart';
 import 'package:bytebank/components/centered_message.dart';
 import 'package:bytebank/components/progress.dart';
 import 'package:bytebank/http/transaction_webclient.dart';
@@ -20,11 +21,9 @@ class TransactionsListState extends State<TransactionsList> {
 
   @override
   Widget build(BuildContext context) {
-    const _tituloAppBar = "Transactions";
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(_tituloAppBar),
+        title: Cabecalho("Transactions"),
       ),
       body: FutureBuilder<List<Transaction>>(
           // future:
