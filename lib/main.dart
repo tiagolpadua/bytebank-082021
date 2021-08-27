@@ -1,17 +1,34 @@
+import 'package:bytebank/models/dark_mode_model.dart';
 import 'package:bytebank/screens/dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   runApp(BytebankApp());
 }
 
-class BytebankApp extends StatefulWidget {
+// provider no pubspec.yaml
+// renomear BytebankApp -> BytebankAppWidget
+// criar BytebankApp stateless como wrapper
+// envolver em um ChangeNotifierProvider
+
+class BytebankApp extends StatelessWidget {
   @override
-  _BytebankAppState createState() => _BytebankAppState();
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => DarkModeModel(),
+      child: BytebankAppWidget(),
+    );
+  }
 }
 
-class _BytebankAppState extends State<BytebankApp> {
+class BytebankAppWidget extends StatefulWidget {
+  @override
+  _BytebankAppWidgetState createState() => _BytebankAppWidgetState();
+}
+
+class _BytebankAppWidgetState extends State<BytebankAppWidget> {
   static const DARK_MODE_KEY_PREF = 'darkMode';
   bool _darkMode = false;
 

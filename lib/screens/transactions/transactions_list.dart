@@ -1,3 +1,4 @@
+import 'package:bytebank/components/cabecalho.dart';
 import 'package:bytebank/components/centered_message.dart';
 import 'package:bytebank/components/progress.dart';
 import 'package:bytebank/http/transaction_webclient.dart';
@@ -6,6 +7,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TransactionsList extends StatefulWidget {
+  final bool _darkMode;
+  final VoidCallback _toggleDarkmode;
+
+  TransactionsList(this._darkMode, this._toggleDarkmode);
+
   @override
   State<StatefulWidget> createState() {
     return TransactionsListState();
@@ -21,7 +27,7 @@ class TransactionsListState extends State<TransactionsList> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(_tituloAppBar),
+        title: Cabecalho(_tituloAppBar, widget._darkMode, widget._toggleDarkmode),
       ),
       body: FutureBuilder<List<Transaction>>(
           // future:

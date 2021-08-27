@@ -1,10 +1,10 @@
+import 'package:bytebank/components/cabecalho.dart';
 import 'package:bytebank/screens/contacts/contacts_lista.dart';
 import 'package:bytebank/screens/transactions/transactions_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
-
   final bool _darkMode;
   final VoidCallback _toggleDarkmode;
 
@@ -29,17 +29,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: [
-            Text('Dashboard'),
-            Spacer(),
-            IconButton(
-              onPressed: () => widget._toggleDarkmode(),
-              icon: Icon(
-                  widget._darkMode ? Icons.lightbulb_outline : Icons.lightbulb),
-            )
-          ],
-        ),
+        title: Cabecalho("Dashboard", widget._darkMode, widget._toggleDarkmode),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,7 +81,7 @@ class _DashboardState extends State<Dashboard> {
   void _showTransactionFeed(BuildContext context) {
     Navigator.of(context).push(
       (MaterialPageRoute(
-        builder: (context) => TransactionsList(),
+        builder: (context) => TransactionsList(widget._darkMode, widget._toggleDarkmode),
       )),
     );
   }
