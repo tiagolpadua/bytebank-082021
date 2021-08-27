@@ -20,6 +20,7 @@ class Cabecalho extends StatelessWidget {
           Text(title),
           Spacer(),
           IconButton(
+            key: const Key("toggleDarkMode"),
             onPressed: () => darkModeModel.toggleDarkMode(),
             icon: Icon(darkModeModel.isDark
                 ? Icons.lightbulb_outline
@@ -28,50 +29,5 @@ class Cabecalho extends StatelessWidget {
         ],
       );
     });
-  }
-}
-
-class _FeatureItem extends StatelessWidget {
-  final String name;
-  final IconData icon;
-  final Function onClick;
-
-  _FeatureItem(this.name, this.icon, {@required onClick})
-      : this.onClick = onClick;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Material(
-        color: Theme.of(context).primaryColor,
-        child: InkWell(
-          onTap: () => onClick(),
-          child: Container(
-            padding: EdgeInsets.all(8.0),
-            width: 140,
-            height: 100,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  this.icon,
-                  color: Colors.white,
-                  size: 24,
-                ),
-                Text(
-                  this.name,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16.0,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
