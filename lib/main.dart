@@ -24,27 +24,6 @@ class BytebankAppWidget extends StatefulWidget {
 }
 
 class _BytebankAppWidgetState extends State<BytebankAppWidget> {
-  // static const DARK_MODE_KEY_PREF = 'darkMode';
-  // bool _darkMode = false;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _loadDarkModePref();
-  // }
-
-  // Future<void> _loadDarkModePref() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     _darkMode = prefs.getBool(DARK_MODE_KEY_PREF) ?? false;
-  //   });
-  // }
-
-  // void _saveDarkModePref() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   prefs.setBool(DARK_MODE_KEY_PREF, _darkMode);
-  // }
-
   @override
   Widget build(BuildContext context) {
     var lightTheme = ThemeData(
@@ -63,11 +42,4 @@ class _BytebankAppWidgetState extends State<BytebankAppWidget> {
       );
     });
   }
-
-// void toggleDarkMode() async {
-//   setState(() {
-//     _darkMode = !_darkMode;
-//     _saveDarkModePref();
-//   });
-// }
 }
