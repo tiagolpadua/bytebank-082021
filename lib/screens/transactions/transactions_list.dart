@@ -4,6 +4,9 @@ import 'package:bytebank/http/transaction_webclient.dart';
 import 'package:bytebank/models/transaction.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+var nf = NumberFormat.simpleCurrency(locale: 'pt_BR');
 
 class TransactionsList extends StatefulWidget {
   @override
@@ -73,7 +76,7 @@ class TransactionItem extends StatelessWidget {
     return Card(
       child: ListTile(
         leading: Icon(Icons.monetization_on),
-        title: Text(_transaction.value.toString()),
+        title: Text(nf.format(_transaction.value)),
         subtitle: Text(_transaction.contact.accountNumber.toString()),
       ),
     );
